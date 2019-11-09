@@ -39,9 +39,8 @@ else:
 #2次元配列化
 cdnt_x = 0
 cdnt_y = 0
-
 for i in range(size_org):
-    data[cdnt_x][cdnt_y]
+    data[cdnt_x][cdnt_y]=
 
 
 
