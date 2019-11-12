@@ -1,5 +1,5 @@
 #filename_i = input("入力ファイル名（拡張子は不要）：")
-filename_i = "map"
+filename_i = "mpoints6"
 filename_o = "output"
 
 #----------ここからデータ読み込み----------
@@ -49,7 +49,6 @@ print("処理完了")
 for i in range(100):
     print(data[0][i])
 '''
-
 #----------ここまでデータ読み込み----------
 
 #----------ここから判定処理----------
