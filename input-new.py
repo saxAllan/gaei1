@@ -42,7 +42,8 @@ for i in range(count_y):
     for j in range(count_x):
         temp = float(orgdata[(i * count_x) + j][2])
         #print(temp)
-        data[j].append(temp)
+        data[j].append([])
+        data[j][0].append(temp)
     print("\r", "処理中...", i + 1, "/", count_y, "   ", end="")
 print("処理完了")
 
@@ -52,3 +53,5 @@ print("処理完了")
 このinputは、data[(x座標)][(y座標)]に(x,y)の標高データが格納されます。
 filename_i を入力ファイル名に適宜変更してください。
 '''
+
+print(data[0][0][0])
