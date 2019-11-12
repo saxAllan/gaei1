@@ -48,5 +48,5 @@ input.data[pt_x][pt_y][1] = label
 for i in range(input.count_y):
 
 
-labelling_x(pt_x, pt_y, label,)
+labelling_x(pt_x, pt_y, label, equal)
 #----------main end----------
