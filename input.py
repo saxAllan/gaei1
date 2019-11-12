@@ -1,8 +1,6 @@
-#----------ここからデータ読み込み----------
-#Belle Carte input (Ver. 1.0)
+#Belle Carte input (Ver. 1.5)
 
 filename_i = input("入力ファイル名（拡張子は不要）：")
-filename_o = "output"
 
 print(filename_i + ".datを読み込んでいます...  ")
 f = open(filename_i + ".dat", "r")
@@ -46,12 +44,3 @@ for i in range(count_y):
         data[j][0].append(temp)
     print("\r", "処理中...", i + 1, "/", count_y, "   ", end="")
 print("処理完了")
-
-#----------ここまでデータ読み込み----------
-
-'''説明
-このinputは、data[(x座標)][(y座標)]に(x,y)の標高データが格納されます。
-filename_i を入力ファイル名に適宜変更してください。
-'''
-
-print(data[0][0][0])
