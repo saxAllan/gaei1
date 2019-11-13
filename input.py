@@ -1,4 +1,4 @@
-#Belle Carte input (Ver. 1.6 :: 20191113)
+#Belle Carte input (Ver. 1.8 :: 20191113-3)
 
 filename_i = input("入力ファイル名（拡張子は不要）：")
 
@@ -45,5 +45,3 @@ for i in range(count_y):
         data[j][i].append(0)
     print("\r", "処理中...", i + 1, "/", count_y, "   ", end="")
 print("処理完了")
-print(data[2][2][0])
-print(data[2][2][1])
