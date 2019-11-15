@@ -12,7 +12,9 @@ def labelling_x(x, y, labelno, list_equal):
         input.data[x + 1][y][1] = labelno
         x += 1
         sa = (input.data[x][y][0] - input.data[x + 1][y][0]) * (input.data[x][y][0] - input.data[x + 1][y][0])
+    print("labelling_x", x, y, labelno)
 
+'''多分いらない
 def labelling_y(x, y, labelno, list_equal):
     #yについて
     sa = (input.data[x][y][0] - input.data[x][y + 1][0]) * (input.data[x][y][0] - input.data[x][y + 1][0])
@@ -24,13 +26,18 @@ def labelling_y(x, y, labelno, list_equal):
         input.data[x][y + 1][1] = labelno
         y += 1
         sa = (input.data[x][y][0] - input.data[x][y + 1][0]) * (input.data[x][y][0] - input.data[x][y + 1][0])
+'''
 
-def labelling_base(base_x, base_y, base_label,base_equal):
-    for i in range(input.count_x):
-        if(input.data[base_x][base_y][1]==0):
+def labelling_base(base_x, base_y, base_label, base_equal):
+    for i in range(base_x, input.count_x):
+        print(input.data[base_x][base_y][1])
+        if (input.data[base_x][base_y][1] == 0):
+            print("入った")
             labelling_x(base_x, base_y, base_label, base_equal)
             if (input.data[base_x][base_y + i][0] - input.data[base_x][base_y + i + 1][0]) * (input.data[base_x][base_y + i][0] - input.data[base_x][base_y + i + 1][0]) < 0.25:
-                labelling_x(base_x, base_y + 1, base_label, base_equal)
+                labelling_base(base_x, base_y + 1, base_label, base_equal)
+        else:
+            print("入ってない")
                 
 
 
@@ -46,13 +53,11 @@ equal = []
 for i in range (2):
     equal.append([])
 
-input.data[pt_x][pt_y][1] = label
-for i in range(input.count_y):
-    for j in range(input.count_x):
+#input.data[pt_x][pt_y][1] = label
+for i in range(input.count_x):
+    for j in range(input.count_y):
+        print(input.data[i][j][1])
         if input.data[i][j][1] == 0:
             labelling_base(pt_x, pt_y, label, equal)
 print("ここまで")
 #----------main end----------
-'''2019年11月12日メモ
-input.data[][][1]を0で初期化してない
-'''
