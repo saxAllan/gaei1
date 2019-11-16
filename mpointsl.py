@@ -1,4 +1,5 @@
 #欠損点削除 Ver. 1.2(20191116)
+
 import input
 
 data2=input.data[:]

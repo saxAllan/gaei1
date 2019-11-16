@@ -1,34 +1,41 @@
+#judgements Ver. 1.24(20191116)
+
 import input
 
-#----------labelling start----------
+#----------def start----------
 def labelling_x(x, y, labelno, list_equal):
     #xについて
-    sa = (input.data[x][y][0] - input.data[x + 1][y][0]) * (input.data[x][y][0] - input.data[x + 1][y][0])
+    lxx = x
+    lxy = y
+    sa = (input.data[lxx][lxy][0] - input.data[lxx - 1][lxy][0]) * (input.data[lxx][lxy][0] - input.data[lxx - 1][lxy][0])
     while sa < 0.25:
-        input.data[x + 1][y][1] = labelno
-        if input.data[x + 1][y][1] != 0: #既にラベリングされてたら、input.data[x + 1][y][1]とlabelnoのデータを二次元配列に格納
-            list_equal[0].append(input.data[x + 1][y][1])
+        #print("labelling_x", lxx, lxy, labelno)  #デバッグ
+        if input.data[lxx][lxy][1] != 0: #既にラベリングされてたら、input.data[lxx + 1][lxy][1]とlabelnoのデータを二次元配列に格納
+            list_equal[0].append(input.data[lxx][lxy][1])
             list_equal[1].append(labelno)
-        x += 1 #次のxへ
-        sa = (input.data[x][y][0] - input.data[x + 1][y][0]) * (input.data[x][y][0] - input.data[x + 1][y][0])
-    print("labelling_x", x, y, labelno) #デバッグ
+        input.data[lxx][lxy][1] = labelno
+        lxx += 1  #次のxへ
+        if lxx == input.count_x - 1:
+            break
+        sa = (input.data[lxx][lxy][0] - input.data[lxx - 1][lxy][0]) * (input.data[lxx][lxy][0] - input.data[lxx - 1][lxy][0])
 
 def labelling_base(base_x, base_y, base_label, base_equal):
-    inpu.data[base_x][base_y][1] = base_label #スタートの点を座標チェック
-    #横方向へ
-    for i in range(base_x, input.count_x):
-        #print(input.data[base_x][base_y][1])
-        if (input.data[i][base_y][1] == 0):
-            print("入った")
-            labelling_x(i, base_y, base_label, base_equal)
-    #上方向へ
-    for i in range(base_x, input.count_x):
-        if base_x == input.count_x - 3 or base_y == input.count_y - 3:
-                break
-        elif (input.data[base_x][base_y + i][0] - input.data[base_x][base_y + i + 1][0]) * (input.data[base_x][base_y + i][0] - input.data[base_x][base_y + i + 1][0]) < 0.25:
-                labelling_base(base_x, base_y + 1, base_label, base_equal)
+    input.data[base_x][base_y][1] = base_label #スタートの点をラベリング
+    #x方向へ
+    if (base_x < input.count_x - 2):
+        if (input.data[base_x + 1][base_y][1] == 0):
+            #print("baseで呼んだよ！", base_x + 1, base_y)
+            labelling_x(base_x + 1, base_y, base_label, base_equal)
+    #y方向へ
+    wi = 0
+    if base_y < input.count_y - 1:
+        while input.data[base_x + wi][base_y + 1][1] == base_label:
+            if (input.data[base_x + wi][base_y + 1][0] - input.data[base_x + wi][base_y][0]) * (input.data[base_x + wi][base_y + 1][0] - input.data[base_x + wi][base_y][0]) < 0.25:
+                    #print("yの話！", base_x + wi, base_y + 1)
+                    labelling_base(base_x + wi, base_y + 1, base_label, base_equal)  #再帰でもう一度baseを呼ぶ
+            wi += 1
 
-#----------labelling end----------
+#----------def end----------
 
 #----------main start----------
 #初期化
@@ -39,10 +46,14 @@ start_x = 0
 start_y = 0
 label = 1
 
+print("ラベリング処理中...")
+
 #ラベリング
 for i in range(input.count_x):
     for j in range(input.count_y):
         if input.data[i][j][1] == 0:
+            print("\r", i + 1, "/", input.count_x, end="   ")
             labelling_base(i, j, label, equal)
+            label += 1
 print("処理終了")
 #----------main end----------

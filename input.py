@@ -1,7 +1,7 @@
-#Belle Carte input (Ver. 1.8 :: 20191113-3)
+#input Ver. 1.12 (20191116)
 
-#filename_i = input("入力ファイル名（拡張子は不要）：")
-filename_i = "norm"
+filename_i = input("入力ファイル名（拡張子は不要）：")
+#filename_i = "norm"
 
 print(filename_i + ".datを読み込んでいます...  ")
 f = open(filename_i + ".dat", "r")
@@ -37,6 +37,7 @@ else:
     print("行列は正規化されていない可能性があります")
 
 #2次元配列化
+print("二次元配列化処理中...")
 for i in range(count_y):
     for j in range(count_x):
         temp = float(orgdata[(i * count_x) + j][2])
@@ -44,5 +45,5 @@ for i in range(count_y):
         data[j].append([])
         data[j][i].append(temp)
         data[j][i].append(0)
-    print("\r", "二次元配列化処理中...", i + 1, "/", count_y, "   ", end="")
+    print("\r", i + 1, "/", count_y, "   ", end="")
 print("処理完了")
