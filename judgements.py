@@ -14,6 +14,7 @@ def labelling_x(x, y, labelno, list_equal):
     print("labelling_x", x, y, labelno) #デバッグ
 
 def labelling_base(base_x, base_y, base_label, base_equal):
+    inpu.data[base_x][base_y][1] = base_label #スタートの点を座標チェック
     #横方向へ
     for i in range(base_x, input.count_x):
         #print(input.data[base_x][base_y][1])
@@ -24,7 +25,7 @@ def labelling_base(base_x, base_y, base_label, base_equal):
     for i in range(base_x, input.count_x):
         if base_x == input.count_x - 3 or base_y == input.count_y - 3:
                 break
-            elif (input.data[base_x][base_y + i][0] - input.data[base_x][base_y + i + 1][0]) * (input.data[base_x][base_y + i][0] - input.data[base_x][base_y + i + 1][0]) < 0.25:
+        elif (input.data[base_x][base_y + i][0] - input.data[base_x][base_y + i + 1][0]) * (input.data[base_x][base_y + i][0] - input.data[base_x][base_y + i + 1][0]) < 0.25:
                 labelling_base(base_x, base_y + 1, base_label, base_equal)
 
 #----------labelling end----------
@@ -36,16 +37,12 @@ for i in range (2):
     equal.append([])
 start_x = 0
 start_y = 0
-pt_x = 0
-pt_y = 0
 label = 1
 
 #ラベリング
-#input.data[pt_x][pt_y][1] = label
 for i in range(input.count_x):
     for j in range(input.count_y):
-        print(input.data[i][j][1])
         if input.data[i][j][1] == 0:
-            labelling_base(pt_x, pt_y, label, equal)
-print("ここまで")
+            labelling_base(i, j, label, equal)
+print("処理終了")
 #----------main end----------
