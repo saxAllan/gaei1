@@ -13,7 +13,9 @@ def labelling_x(x, y, labelno, list_equal):
         if input.data[lxx][lxy][1] != 0: #既にラベリングされてたら、input.data[lxx + 1][lxy][1]とlabelnoのデータを二次元配列に格納
             list_equal[0].append(input.data[lxx][lxy][1])
             list_equal[1].append(labelno)
-        input.data[lxx][lxy][1] = labelno
+        else:
+            input.data[lxx][lxy][1] = labelno
+            break
         lxx += 1  #次のxへ
         if lxx == input.count_x - 1:
             break
@@ -23,9 +25,8 @@ def labelling_base(base_x, base_y, base_label, base_equal):
     input.data[base_x][base_y][1] = base_label #スタートの点をラベリング
     #x方向へ
     if (base_x < input.count_x - 2):
-        if (input.data[base_x + 1][base_y][1] == 0):
-            #print("baseで呼んだよ！", base_x + 1, base_y)
-            labelling_x(base_x + 1, base_y, base_label, base_equal)
+        #print("baseで呼んだよ！", base_x + 1, base_y)
+        labelling_x(base_x + 1, base_y, base_label, base_equal)
     #y方向へ
     wi = 0
     if base_y < input.count_y - 1:

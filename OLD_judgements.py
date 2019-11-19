@@ -1,82 +1,59 @@
-filename_i = input("入力ファイル名（拡張子は不要）：")
-filename_o = "output"
+#judgements Ver. 1.24(20191116)
 
-#----------ここからデータ読み込み----------
-print(filename_i+".datを読み込んでいます")
-f = open(filename_i + ".dat", "r")
-lines = f.readlines()
-orgdata = []
-for i in lines:
-    orgdata.append(list(map(float, i.split())))
-f.close()
-for i in range(len(orgdata)):
-    orgdata[i].append(0)
+import input
 
-#デバッグ用
-for i in range(20):
-#    print(orgdata[i][0])
-    print(orgdata[i])
-print("      ...", len(orgdata), "個のデータを読み込みました")
+#----------def start----------
+def labelling_x(x, y, labelno, list_equal):
+    #xについて
+    lxx = x
+    lxy = y
+    sa = (input.data[lxx][lxy][0] - input.data[lxx - 1][lxy][0]) * (input.data[lxx][lxy][0] - input.data[lxx - 1][lxy][0])
+    while sa < 0.25:
+        #print("labelling_x", lxx, lxy, labelno)  #デバッグ
+        if input.data[lxx][lxy][1] != 0: #既にラベリングされてたら、input.data[lxx + 1][lxy][1]とlabelnoのデータを二次元配列に格納
+            list_equal[0].append(input.data[lxx][lxy][1])
+            list_equal[1].append(labelno)
+        input.data[lxx][lxy][1] = labelno
+        lxx += 1  #次のxへ
+        if lxx == input.count_x - 1:
+            break
+        sa = (input.data[lxx][lxy][0] - input.data[lxx - 1][lxy][0]) * (input.data[lxx][lxy][0] - input.data[lxx - 1][lxy][0])
 
-#----------ここまでデータ読み込み----------
+def labelling_base(base_x, base_y, base_label, base_equal):
+    input.data[base_x][base_y][1] = base_label #スタートの点をラベリング
+    #x方向へ
+    if (base_x < input.count_x - 2):
+        if (input.data[base_x + 1][base_y][1] == 0):
+            #print("baseで呼んだよ！", base_x + 1, base_y)
+            labelling_x(base_x + 1, base_y, base_label, base_equal)
+    #y方向へ
+    wi = 0
+    if base_y < input.count_y - 1:
+        while input.data[base_x + wi][base_y + 1][1] == base_label:
+            if (input.data[base_x + wi][base_y + 1][0] - input.data[base_x + wi][base_y][0]) * (input.data[base_x + wi][base_y + 1][0] - input.data[base_x + wi][base_y][0]) < 0.25:
+                    #print("yの話！", base_x + wi, base_y + 1)
+                    labelling_base(base_x + wi, base_y + 1, base_label, base_equal)  #再帰でもう一度baseを呼ぶ
+            wi += 1
 
-#----------ここから判定アルゴリズム----------
+#----------def end----------
 
-orgdata[0][3] = 0
-y = orgdata[0][1]
-z = orgdata[0][2]
-count_tmp = 1
-print("判定処理開始")
-for i in range(1, len(orgdata)):
-    if orgdata[i][1] != y:
-        count_tmp += 1
-        print("\r", count_tmp, "行目処理中", end="")
-        temp = z - orgdata[i][2]
-        if 1 > temp and temp > -1:
-            orgdata[i][3] = 0
-        elif temp >= 1:
-            orgdata[i][3] = -1
-        else:
-            orgdata[i][3] = 1
-        y = orgdata[i][1]
-        z = orgdata[i][2]
-    else:
-        temp = orgdata[i - 1][2] - orgdata[i][2]
-        if 5 > temp and temp > -5:
-            orgdata[i][3] = orgdata[i - 1][3]
-        elif temp >= 5:
-            orgdata[i][3] = orgdata[i - 1][3] - 1
-        else:
-            orgdata[i][3] = orgdata[i - 1][3] + 1
+#----------main start----------
+#初期化
+equal = []
+for i in range (2):
+    equal.append([])
+start_x = 0
+start_y = 0
+label = 1
 
-#----------ここまで判定アルゴリズム----------
+print("ラベリング処理中...")
 
-#----------ここから内容生成----------
-print("\nファイルの内容を生成しています")
-out = "#VRML V2.0 utf8\n"
-
-#テスト用
-for i in range(int(len(orgdata)/10)):
-    out += str(orgdata[i][0])
-    out += str(" ")
-    out += str(orgdata[i][1])
-    out += str(" ")
-    out += str(orgdata[i][3])
-    out += "\n"
-
-
-#----------ここまで内容生成----------
-
-
-
-#----------ここからファイル出力----------
-f = open(filename_o + ".wrl", mode="w")
-f.write(out)
-f.close()
-print(filename_o+".wrl を出力しました")
-#----------ここまでファイル出力----------
-
-'''参考情報
-openのときにwith openにするとcloseしなくてよい
-https://note.nkmk.me/python-file-io-open-with/
-'''
+#ラベリング
+for i in range(input.count_x):
+    for j in range(input.count_y):
+        if input.data[i][j][1] == 0:
+            print("\r", i + 1, "/", input.count_x, end="   ")
+            labelling_base(i, j, label, equal)
+            label += 1
+print("処理終了")
+#----------main end----------
