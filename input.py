@@ -1,9 +1,12 @@
-#input Ver. 1.12 (20191116)
+print("\n========================================")
+print("  input Ver. 1.13 (20191124-3)")
+print("========================================\n")
+
 
 filename_i = input("入力ファイル名（拡張子は不要）：")
 #filename_i = "norm"
 
-print(filename_i + ".datを読み込んでいます...  ")
+print(filename_i + ".datを読み込み中...  ")
 f = open(filename_i + ".dat", "r")
 lines = f.readlines()
 orgdata = []
@@ -32,9 +35,9 @@ for i in range(count_x):
 #正規化チェック
 print("x=",count_x,"y=",count_y)
 if count_x * count_y == size_org:
-    print("行列は正規化されています")
+    print("正規化：〇")
 else:
-    print("行列は正規化されていない可能性があります")
+    print("正規化：×")
 
 #2次元配列化
 print("二次元配列化処理中...")
