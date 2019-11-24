@@ -1,4 +1,4 @@
-# outwrl Ver.1.0(20191124)
+# out Ver.1.2(20191124-2)
 
 from scipy.spatial import Delaunay
 import matplotlib.pyplot as plt
@@ -45,6 +45,7 @@ print("ドロネー完了")
 print(len(pts))
 print(len(pts[tri.simplices]))
 
+#出力
 filename_o = open('output.wrl', 'w')
 start = '#VRML V2.0 utf8\n'
 filename_o.write(start)
