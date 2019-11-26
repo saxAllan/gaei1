@@ -2,6 +2,8 @@ from scipy.spatial import Delaunay
 import matplotlib.pyplot as plt
 import numpy as np
 import input
+import judgements
+
 print("\n========================================")
 print("  out Ver. 1.3 (20191124-7)")
 print("========================================\n")
@@ -11,7 +13,7 @@ newdata = []
 zdata = []
 for i in range(input.count_y):
     for j in range(input.count_x):
-        zdata.append(input.data[j][i][0])
+        zdata.append(judgements.nokori[j][i][0])
         newdata.append(j)
         newdata.append(i)
 
