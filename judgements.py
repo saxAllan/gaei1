@@ -3,7 +3,7 @@ import statistics
 import numpy
 import input
 print("\n========================================")
-print("  judgements Ver. 1.26 (20191126)")
+print("  judgements Ver. 1.30 (20191201)")
 print("========================================\n")
 
 
