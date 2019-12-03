@@ -15,8 +15,6 @@ max_label = 0
 samevalue = []
 for i in range(2):
     samevalue.append([])
-print(samevalue)
-
 print("judgements 処理中...")
 
 th = 1  # しきい値
@@ -31,8 +29,7 @@ for i in range(datinput.count_x):
             label = max_label + 1
             max_label += 1
 
-        print("\r", i * datinput.count_y + j + 1, "/",
-              datinput.count_x * datinput.count_y, end="   ")
+        print("\r", i * datinput.count_y + j + 1, "/", datinput.count_x * datinput.count_y, end="   ")
         datinput.data[i][j][1] = label
         # 上方向
         if j < datinput.count_y - 2:
@@ -56,8 +53,21 @@ for i in range(datinput.count_x):
                     samevalue[1].append(datinput.data[i + 1][j + 1][1])
                 datinput.data[i + 1][j + 1][1] = label
 print("処理終了")
+print(len(samevalue[0]), len(samevalue[1]))
+len_same = len(samevalue[0])
+'''
+for i in range(datinput.count_x):
+    for j in range(datinput.count_y):
+        for ii in range(len(samevalue[0])):
+            if datinput.data[i][j][1] == samevalue[1][ii]:
+                datinput.data[i][j][1] = samevalue[0][ii]
+            print("\r", i * datinput.count_y + j + 1, "/", datinput.count_x * datinput.count_y, end="   ")
+'''
+newdata = [[[], []], [[], []]]
+for i in range(len_same):
+    newdata[i][j]=[samevalue[0][j] if j==samevalue[0][j] else inputdata]
 
-print(samevalue[0][0])
+
 
 # デバッグ
 test = []
