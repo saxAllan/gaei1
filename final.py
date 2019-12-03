@@ -1,6 +1,6 @@
 #マージ Ver. 1.12(20191116)
 
-import input
+import datinput
 import mpointsl
 import judgements
 import out

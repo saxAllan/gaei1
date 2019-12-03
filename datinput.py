@@ -1,10 +1,9 @@
 print("\n========================================")
-print("  input Ver. 1.13 (20191124-3)")
+print("  datinput Ver. 2.1 (20191203)")
 print("========================================\n")
 
 
 filename_i = input("入力ファイル名（拡張子は不要）：")
-#filename_i = "norm"
 
 print(filename_i + ".datを読み込み中...  ")
 f = open(filename_i + ".dat", "r")
@@ -44,7 +43,6 @@ print("二次元配列化処理中...")
 for i in range(count_y):
     for j in range(count_x):
         temp = float(orgdata[(i * count_x) + j][2])
-        #print(temp)
         data[j].append([])
         data[j][i].append(temp)
         data[j][i].append(0)

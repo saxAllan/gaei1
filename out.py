@@ -1,7 +1,7 @@
 from scipy.spatial import Delaunay
 import matplotlib.pyplot as plt
 import numpy as np
-import input
+import datinput
 import judgements
 
 print("\n========================================")
@@ -11,8 +11,8 @@ print("========================================\n")
 
 newdata = []
 zdata = []
-for i in range(input.count_y):
-    for j in range(input.count_x):
+for i in range(datinput.count_y):
+    for j in range(datinput.count_x):
         zdata.append(judgements.nokori[j][i][0])
         newdata.append(j)
         newdata.append(i)
