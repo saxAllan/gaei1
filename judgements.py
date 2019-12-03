@@ -12,6 +12,10 @@ start_x = 0
 start_y = 0
 label = 0
 max_label = 0
+samevalue = []
+for i in range(2):
+    samevalue.append([])
+print(samevalue)
 
 print("judgements 処理中...")
 
@@ -31,30 +35,29 @@ for i in range(input.count_x):
               input.count_x * input.count_y, end="   ")
         input.data[i][j][1] = label
         # 上方向
-        if j < input.count_y - 3:
-            if (input.data[i][j + 2][0] - input.data[i][j][0]) * (input.data[i][j + 2][0] - input.data[i][j][0]) < th:
-                input.data[i][j + 2][1] = label
-                input.data[i][j + 1][1] = label
-            elif (input.data[i][j + 1][0] - input.data[i][j][0]) * (input.data[i][j + 1][0] - input.data[i][j][0]) < th:
-                input.data[i][j + 1][1] = label
-        elif j < input.count_y - 2:
+        if j < input.count_y - 2:
             if (input.data[i][j + 1][0] - input.data[i][j][0]) * (input.data[i][j + 1][0] - input.data[i][j][0]) < th:
+                if input.data[i][j + 1][1] != 0:
+                    samevalue[0].append(label)
+                    samevalue[1].append(input.data[i][j + 1][1])
                 input.data[i][j + 1][1] = label
         # 右方向
-        if i < input.count_x - 3:
-            if (input.data[i + 2][j][0] - input.data[i][j][0]) * (input.data[i + 2][j][0] - input.data[i][j][0]) < th:
-                input.data[i + 2][j][1] = label
-                input.data[i + 1][j][1] = label            
-            elif (input.data[i + 1][j][0] - input.data[i][j][0]) * (input.data[i + 1][j][0] - input.data[i][j][0]) < th:
-                input.data[i + 1][j][1] = label
-        elif i < input.count_x - 2:
+        if i < input.count_x - 2:
             if (input.data[i + 1][j][0] - input.data[i][j][0]) * (input.data[i + 1][j][0] - input.data[i][j][0]) < th:
+                if input.data[i + 1][j][1] != 0:
+                    samevalue[0].append(label)
+                    samevalue[1].append(input.data[i + 1][j][1])
                 input.data[i + 1][j][1] = label
         # 右上方向
         if i < input.count_x - 2 and j < input.count_y - 2:
             if (input.data[i + 1][j + 1][0] - input.data[i][j][0]) * (input.data[i + 1][j + 1][0] - input.data[i][j][0]) < th:
+                if input.data[i][j + 1][1] != 0:
+                    samevalue[0].append(label)
+                    samevalue[1].append(input.data[i + 1][j + 1][1])
                 input.data[i + 1][j + 1][1] = label
 print("処理終了")
+
+print(samevalue[1])
 
 # デバッグ
 test = []
@@ -73,7 +76,7 @@ for i in range(input.count_y):
     for j in range(input.count_x):
         nokori[j].append([])
         nokori[j][i].append(0)
-for k in range(10):
+for k in range(100):
     mode = mode_org[k][0]
     print(mode)
     for i in range(input.count_y):
@@ -82,10 +85,37 @@ for k in range(10):
                 count_in += 1
                 nokori[j][i][0] = input.data[j][i][0]
 
-print(count_in)
-# print(nokori)
-
-#test_np = numpy.array(test)
 
 
-# print(test)
+'''
+        # 上方向
+        if j < input.count_y - 2:
+            if (input.data[i][j + 1][0] - input.data[i][j][0]) * (input.data[i][j + 1][0] - input.data[i][j][0]) < th:
+                if input.data[i][j + 1][1] == 0:
+                    input.data[i][j + 1][1] = label
+                else:
+                    for ii in range(input.count_x):
+                        for jj in range(input.count_y):
+                            if input.data[ii][jj][1] == input.data[i][j + 1][1]:
+                                input.data[ii][jj][1] = label
+        # 右方向
+        if i < input.count_x - 2:
+            if (input.data[i + 1][j][0] - input.data[i][j][0]) * (input.data[i + 1][j][0] - input.data[i][j][0]) < th:
+                if input.data[i + 1][j][1] == 0:
+                    input.data[i + 1][j][1] = label
+                else:
+                    for ii in range(input.count_x):
+                        for jj in range(input.count_y):
+                            if input.data[ii][jj][1] == input.data[i + 1][j][1]:
+                                input.data[ii][jj][1] = label
+        # 右上方向
+        if i < input.count_x - 2 and j < input.count_y - 2:
+            if (input.data[i + 1][j + 1][0] - input.data[i][j][0]) * (input.data[i + 1][j + 1][0] - input.data[i][j][0]) < th:
+                if input.data[i + 1][j + 1][1] == 0:
+                    input.data[i + 1][j + 1][1] = label
+                else:
+                    for ii in range(input.count_x):
+                        for jj in range(input.count_y):
+                            if input.data[ii][jj][1] == input.data[i + 1][j + 1][1]:
+                                input.data[ii][jj][1] = label
+'''

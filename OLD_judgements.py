@@ -1,65 +1,91 @@
-#judgements Ver. 1.24(20191116)
-
+import collections
+import statistics
+import numpy
 import input
+print("\n========================================")
+print("  judgements Ver. 1.30 (20191201)")
+print("========================================\n")
 
-#----------def start----------
-def labelling_x(x, y, labelno, list_equal):
-    #xについて
-    lxx = x
-    lxy = y
-    sa = (input.data[lxx][lxy][0] - input.data[lxx - 1][lxy][0]) * (input.data[lxx][lxy][0] - input.data[lxx - 1][lxy][0])
-    while sa < 0.25:
-        #print("labelling_x", lxx, lxy, labelno)  #デバッグ
-        if input.data[lxx][lxy][1] != 0:  #既にラベリングされてたら、input.data[lxx + 1][lxy][1]とlabelnoのデータを二次元配列に格納
-            #print("入った")
-            list_equal[0].append(input.data[lxx][lxy][1])
-            list_equal[1].append(labelno)
-        else:
-            input.data[lxx][lxy][1] = labelno
-            break
-        lxx += 1  #次のxへ
-        if lxx == input.count_x - 1:
-            break
-        sa = (input.data[lxx][lxy][0] - input.data[lxx - 1][lxy][0]) * (input.data[lxx][lxy][0] - input.data[lxx - 1][lxy][0])
 
-def labelling_base(base_x, base_y, base_label, base_equal):
-    input.data[base_x][base_y][1] = base_label #スタートの点をラベリング
-    #x方向へ
-    if (base_x < input.count_x - 2):
-        #print("baseで呼んだよ！", base_x + 1, base_y)
-        labelling_x(base_x + 1, base_y, base_label, base_equal)
-    #y方向へ
-    wi = 0
-    if base_y < input.count_y - 1:
-        while input.data[base_x + wi][base_y][1] == base_label:
-            print("while")
-            if (input.data[base_x + wi][base_y + 1][0] - input.data[base_x + wi][base_y][0]) * (input.data[base_x + wi][base_y + 1][0] - input.data[base_x + wi][base_y][0]) < 0.25:
-                    #print("yの話！", base_x + wi, base_y + 1)
-                    labelling_base(base_x + wi, base_y + 1, base_label, base_equal)  #再帰でもう一度baseを呼ぶ
-            wi += 1
-            if base_x + wi == input.count_y - 1:
-                break
-
-#----------def end----------
-
-#----------main start----------
-#初期化
-equal = []
-for i in range (2):
-    equal.append([])
+# 初期化
 start_x = 0
 start_y = 0
-label = 1
+label = 0
+max_label = 0
 
-print("ラベリング処理中...")
+print("judgements 処理中...")
 
-#ラベリング
+th = 1  # しきい値
+
+# ラベリング
 for i in range(input.count_x):
     for j in range(input.count_y):
-        if input.data[i][j][1] == 0:
-            print("\r", i + 1, "/", input.count_x, end="   ")
-            labelling_base(i, j, label, equal)
-            label += 1
+        # 自分自身の判定
+        if input.data[i][j][1] != 0:
+            label = input.data[i][j][1]
+        else:
+            label = max_label + 1
+            max_label += 1
+
+        print("\r", i * input.count_y + j + 1, "/",
+              input.count_x * input.count_y, end="   ")
+        input.data[i][j][1] = label
+        # 上方向
+        if j < input.count_y - 3:
+            if (input.data[i][j + 2][0] - input.data[i][j][0]) * (input.data[i][j + 2][0] - input.data[i][j][0]) < th:
+                input.data[i][j + 2][1] = label
+                input.data[i][j + 1][1] = label
+            elif (input.data[i][j + 1][0] - input.data[i][j][0]) * (input.data[i][j + 1][0] - input.data[i][j][0]) < th:
+                input.data[i][j + 1][1] = label
+        elif j < input.count_y - 2:
+            if (input.data[i][j + 1][0] - input.data[i][j][0]) * (input.data[i][j + 1][0] - input.data[i][j][0]) < th:
+                input.data[i][j + 1][1] = label
+        # 右方向
+        if i < input.count_x - 3:
+            if (input.data[i + 2][j][0] - input.data[i][j][0]) * (input.data[i + 2][j][0] - input.data[i][j][0]) < th:
+                input.data[i + 2][j][1] = label
+                input.data[i + 1][j][1] = label            
+            elif (input.data[i + 1][j][0] - input.data[i][j][0]) * (input.data[i + 1][j][0] - input.data[i][j][0]) < th:
+                input.data[i + 1][j][1] = label
+        elif i < input.count_x - 2:
+            if (input.data[i + 1][j][0] - input.data[i][j][0]) * (input.data[i + 1][j][0] - input.data[i][j][0]) < th:
+                input.data[i + 1][j][1] = label
+        # 右上方向
+        if i < input.count_x - 2 and j < input.count_y - 2:
+            if (input.data[i + 1][j + 1][0] - input.data[i][j][0]) * (input.data[i + 1][j + 1][0] - input.data[i][j][0]) < th:
+                input.data[i + 1][j + 1][1] = label
 print("処理終了")
-#----------main end----------
-print(equal)
+
+# デバッグ
+test = []
+for i in range(input.count_x):
+    for j in range(input.count_y):
+        test.append(input.data[i][j][1])
+test.sort()
+#mode = statistics.mode(test)
+mode_org = collections.Counter(test).most_common()
+nokori = []
+for i in range(input.count_x):
+    nokori.append([])
+count_in = 0
+
+for i in range(input.count_y):
+    for j in range(input.count_x):
+        nokori[j].append([])
+        nokori[j][i].append(0)
+for k in range(10):
+    mode = mode_org[k][0]
+    print(mode)
+    for i in range(input.count_y):
+        for j in range(input.count_x):
+            if input.data[j][i][1] == mode:
+                count_in += 1
+                nokori[j][i][0] = input.data[j][i][0]
+
+print(count_in)
+# print(nokori)
+
+#test_np = numpy.array(test)
+
+
+# print(test)
