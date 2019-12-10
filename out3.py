@@ -3,8 +3,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import norminput
 import mpointsl
+import judgements3
+
 print("\n========================================")
-print("  out Ver. 1.4 (20191210-7)")
+print("  out Ver. 1.4 (20191210-7)  ※nokori改造")
 print("========================================\n")
 
 
@@ -12,7 +14,7 @@ newdata = []
 zdata = []
 for i in range(norminput.count_y):
     for j in range(norminput.count_x):
-        zdata.append(norminput.data[j][i][0])
+        zdata.append(judgements3.nokori[j][i][0])
         newdata.append(j)
         newdata.append(i)
 print(norminput.count_x)
@@ -65,7 +67,7 @@ for i in range(temp_len):
     conma3 = '-1,\n'
     outfile.write(conma3)
 print("処理完了")
-text2 = ']\n}\nappearance Appearance { \nmaterial\nMaterial {\ndiffuseColor 1 0 1\n}\n}\n}\n'
+text2 = ']\n}\nappearance Appearance { \nmaterial\nMaterial {\ndiffuseColor 0.4 0.8 0.5\n}\n}\n}\n'
 outfile.write(text2)
 
 #側面
@@ -126,7 +128,7 @@ for i in range(norminput.count_x + 2):
 conma3 = '-1,\n'
 outfile.write(conma3)
 print("y_max処理完了")
-text2 = ']\n}\nappearance Appearance { \nmaterial\nMaterial {\ndiffuseColor 1 0 1\n}\n}\n}\n'
+text2 = ']\n}\nappearance Appearance { \nmaterial\nMaterial {\ndiffuseColor 0.4 0.8 0.5\n}\n}\n}\n'
 outfile.write(text2)
 
 text1 = 'Shape {\ngeometry IndexedFaceSet { \nsolid FALSE\ncoord Coordinate { \npoint [\n'
@@ -165,7 +167,7 @@ for i in range(norminput.count_y + 2):
 conma3 = '-1,\n'
 outfile.write(conma3)
 print("x_max処理完了")
-text2 = ']\n}\nappearance Appearance { \nmaterial\nMaterial {\ndiffuseColor 1 0 1\n}\n}\n}\n'
+text2 = ']\n}\nappearance Appearance { \nmaterial\nMaterial {\ndiffuseColor 0.4 0.8 0.5\n}\n}\n}\n'
 outfile.write(text2)
 
 text1 = 'Shape {\ngeometry IndexedFaceSet { \nsolid FALSE\ncoord Coordinate { \npoint [\n'
@@ -204,7 +206,7 @@ for i in range(norminput.count_x + 2):
 conma3 = '-1,\n'
 outfile.write(conma3)
 print("y_min処理完了")
-text2 = ']\n}\nappearance Appearance { \nmaterial\nMaterial {\ndiffuseColor 1 0 1\n}\n}\n}\n'
+text2 = ']\n}\nappearance Appearance { \nmaterial\nMaterial {\ndiffuseColor 0.4 0.8 0.5\n}\n}\n}\n'
 outfile.write(text2)
 
 text1 = 'Shape {\ngeometry IndexedFaceSet { \nsolid FALSE\ncoord Coordinate { \npoint [\n'
@@ -243,7 +245,7 @@ for i in range(norminput.count_y + 2):
 conma3 = '-1,\n'
 outfile.write(conma3)
 print("x_min処理完了")
-text2 = ']\n}\nappearance Appearance { \nmaterial\nMaterial {\ndiffuseColor 1 0 1\n}\n}\n}\n'
+text2 = ']\n}\nappearance Appearance { \nmaterial\nMaterial {\ndiffuseColor 0.4 0.8 0.5\n}\n}\n}\n'
 outfile.write(text2)
 
 #底面
@@ -284,5 +286,5 @@ for i in range(4):
 conma3 = '-1,\n'
 outfile.write(conma3)
 print("底面処理完了")
-text2 = ']\n}\nappearance Appearance { \nmaterial\nMaterial {\ndiffuseColor 1 0 1\n}\n}\n}\n'
+text2 = ']\n}\nappearance Appearance { \nmaterial\nMaterial {\ndiffuseColor 0.4 0.8 0.5\n}\n}\n}\n'
 outfile.write(text2)
