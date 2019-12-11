@@ -32,7 +32,7 @@ fig = plt.figure()
 print("Delaunay 処理完了   (len(pts)=", len(pts), "), (len(pts[tri.simplices])=", len(pts[tri.simplices]), ")")
 
 #出力
-filename_o = "output"
+filename_o = "wrloutput"
 outfile = open(filename_o + '.wrl', 'w')
 print(filename_o + ".wrl として出力中...")
 

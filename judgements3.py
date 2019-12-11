@@ -51,8 +51,6 @@ label = 0
 max_label = 0
 print("judgements 処理中...")
 
-th = 1  # しきい値
-
 # ラベリング
 nokori = []
 for i in range(norminput.count_x):
@@ -65,24 +63,25 @@ for i in range(norminput.count_x):
 
 area_x = [0]
 area_y = [0]
-area_no = 14
-tmp = (norminput.count_x // area_no) + 1
+divide_x = 18
+divide_y = 3
+tmp = (norminput.count_x // divide_x) + 1
 while (tmp< norminput.count_x):
     area_x.append(tmp)
-    tmp += (norminput.count_x // area_no) + 1
-if tmp < norminput.count_x + (norminput.count_x // area_no):
+    tmp += (norminput.count_x // divide_x) + 1
+if tmp < norminput.count_x + (norminput.count_x // divide_x):
     area_x.append(norminput.count_x)
-tmp = (norminput.count_y // area_no) + 1
+tmp = (norminput.count_y // divide_y) + 1
 while (tmp< norminput.count_y):
     area_y.append(tmp)
-    tmp += (norminput.count_y // area_no) + 1
-if tmp < norminput.count_y + (norminput.count_y // area_no):
+    tmp += (norminput.count_y // divide_y) + 1
+if tmp < norminput.count_y + (norminput.count_y // divide_y):
     area_y.append(norminput.count_y)
 print(area_x)
 print(area_y)
 
-for i in range(area_no):
-    for j in range(area_no):
+for i in range(divide_x):
+    for j in range(divide_y):
         print(i, j, end=" ")
         master(area_x[i], area_x[i + 1], area_y[j], area_y[j + 1], nokori)
 
