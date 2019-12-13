@@ -3,7 +3,7 @@ import numpy
 import norminput
 
 print("\n========================================")
-print("  judgements Ver. 3.2 (20191208)")
+print("  judgements Ver. 4.3 (20191213)")
 print("========================================\n")
 
 def master(xstart, xend, ystart, yend, nokori):
