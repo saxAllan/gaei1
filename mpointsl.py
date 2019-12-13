@@ -1,6 +1,6 @@
 #欠損点削除
 print("\n========================================")
-print("  mpointsl Ver. 1.4 (20191210-2)")
+print("  mpointsl Ver. 1.5 (20191213)")
 print("========================================\n")
 
 import norminput
@@ -29,3 +29,4 @@ for i in range(norminput.count_x):
         if norminput.data[i][j][0]-norminput.data[i][j-1][0]>=5 and norminput.data[i][j][0]-norminput.data[i][j+1][0]>=5:
             norminput.data[i][j][0]=(norminput.data[i][j-1][0]+norminput.data[i][j+1][0])/2
 
+print("欠損点処理完了")
