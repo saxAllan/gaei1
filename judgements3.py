@@ -11,29 +11,34 @@ def master(xstart, xend, ystart, yend, nokori):
     orghigh = []
     for i in range(xstart, xend):
         for j in range(ystart, yend):
+            orghigh.append(norminput.data[i][j][0])  #四分位数用
+            high.append((norminput.data[i][j][0] // 2) * 2)  #下から用
+            norminput.data[i][j][1] = (norminput.data[i][j][0] // 2) * 2  #下から用
+            '''
             if norminput.data[i][j][0] < 40:                
-                orghigh.append(norminput.data[i][j][0])  #中央値用
-                high.append((norminput.data[i][j][0] // 2) * 2)  #最頻値用
-                norminput.data[i][j][1] = (norminput.data[i][j][0] // 2) * 2  #最頻値用
+                orghigh.append(norminput.data[i][j][0])  #四分位数用
+                high.append((norminput.data[i][j][0] // 2) * 2)  #下から用
+                norminput.data[i][j][1] = (norminput.data[i][j][0] // 2) * 2  #下から用
             else:
-                orghigh.append(10)  #中央値用
-                high.append(10)  #最頻値用
-                norminput.data[i][j][1] = (norminput.data[i][j][0] // 2) * 2 #最頻値用
+                orghigh.append(10)  #四分位数用
+                high.append(10)  #下から用
+                norminput.data[i][j][1] = (norminput.data[i][j][0] // 2) * 2 #下から用
+            '''
 
-    #最頻値
+    #下から
     mode_high = statistics.mode(high)
     high_list = []
     for i in range(40):
         high_list.append(high.count(i))
-    #print(high_list)
+    print(high_list)
     tmphigh = 0
     for i in range(40):
         tmphigh += high_list[i]
-        if tmphigh > 500:
-            mode_high = i + 1
+        if tmphigh > 1800:
+            mode_high = i + 3
             break
-        
-    #中央値
+
+    #四分位数
     orghigh.sort()
     medi_high = 0
     lengs = len(high)
@@ -42,18 +47,26 @@ def master(xstart, xend, ystart, yend, nokori):
     else:
         medi_high = (orghigh[lengs // 4] + orghigh[(lengs // 4) + 1]) / 2.0
 
-    print("    最頻値:", mode_high, "    中央値:", medi_high)
-    
+    print("    下からx:", mode_high, "    第一四分位:", medi_high)
+
+    for i in range(ystart, yend):
+        for j in range(xstart, xend):
+            if norminput.data[j][i][1] <= mode_high:  #下から
+                nokori[j][i][0] = norminput.data[j][i][0]
+
+
+    '''
     if mode_high > medi_high:
         for i in range(ystart, yend):
             for j in range(xstart, xend):
-                if norminput.data[j][i][1] <= mode_high:  #最頻値
+                if norminput.data[j][i][1] <= mode_high:  #下から
                     nokori[j][i][0] = norminput.data[j][i][0]
     else:
         for i in range(ystart, yend):
             for j in range(xstart, xend):
-                if norminput.data[j][i][1] <= medi_high:  #中央値
+                if norminput.data[j][i][1] <= medi_high:  #四分位数
                     nokori[j][i][0] = norminput.data[j][i][0]
+    '''
 
 # 初期化
 start_x = 0
@@ -74,7 +87,7 @@ for i in range(norminput.count_x):
 
 area_x = [0]
 area_y = [0]
-divide_x = 18
+divide_x = 16
 divide_y = 7
 tmp = (norminput.count_x // divide_x) + 1
 while (tmp< norminput.count_x):
