@@ -13,23 +13,34 @@ def master(xstart, xend, ystart, yend, nokori):
         for j in range(ystart, yend):
             if norminput.data[i][j][0] < 40:                
                 orghigh.append(norminput.data[i][j][0])  #中央値用
-                high.append((norminput.data[i][j][0] // 4) * 4)  #最頻値用
-                norminput.data[i][j][1] = (norminput.data[i][j][0] // 4) * 4  #最頻値用
+                high.append((norminput.data[i][j][0] // 2) * 2)  #最頻値用
+                norminput.data[i][j][1] = (norminput.data[i][j][0] // 2) * 2  #最頻値用
             else:
                 orghigh.append(10)  #中央値用
                 high.append(10)  #最頻値用
-                norminput.data[i][j][1] = (norminput.data[i][j][0] // 4) * 4 #最頻値用
+                norminput.data[i][j][1] = (norminput.data[i][j][0] // 2) * 2 #最頻値用
 
     #最頻値
     mode_high = statistics.mode(high)
+    high_list = []
+    for i in range(40):
+        high_list.append(high.count(i))
+    #print(high_list)
+    tmphigh = 0
+    for i in range(40):
+        tmphigh += high_list[i]
+        if tmphigh > 500:
+            mode_high = i + 1
+            break
+        
     #中央値
     orghigh.sort()
     medi_high = 0
     lengs = len(high)
     if lengs % 2 == 1:
-        medi_high = orghigh[(lengs // 2) + 1]
+        medi_high = orghigh[(lengs // 4) + 1]
     else:
-        medi_high = (orghigh[lengs // 2] + orghigh[(lengs // 2) + 1]) / 2.0
+        medi_high = (orghigh[lengs // 4] + orghigh[(lengs // 4) + 1]) / 2.0
 
     print("    最頻値:", mode_high, "    中央値:", medi_high)
     
@@ -64,7 +75,7 @@ for i in range(norminput.count_x):
 area_x = [0]
 area_y = [0]
 divide_x = 18
-divide_y = 3
+divide_y = 7
 tmp = (norminput.count_x // divide_x) + 1
 while (tmp< norminput.count_x):
     area_x.append(tmp)
@@ -88,5 +99,6 @@ for i in range(divide_x):
 
 '''メモ
 第１四分位数を利用
-細分化するなら、隣のエリアと四分位数一緒だったら同じで処理してもいいかも
+地図の横は1.14kmくらい
+　→縦は1kmくらい？
 '''
