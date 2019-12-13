@@ -1,3 +1,5 @@
+import sys
+sys.setrecursionlimit(2000)
 from scipy.spatial import Delaunay
 import matplotlib.pyplot as plt
 import numpy as np
