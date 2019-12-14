@@ -1,5 +1,5 @@
 print("\n========================================")
-print("  norminput Ver. 3.1 (20191208)")
+print("  norminput Ver. 3.2 (20191214)")
 print("========================================\n")
 
 from operator import itemgetter
@@ -88,6 +88,6 @@ for i in range(count_y):
         temp = float(orgdata[(i * count_x) + j][2])
         data[j].append([])
         data[j][i].append(temp)
-        data[j][i].append(0)
+        data[j][i].append(1)
     print("\r", i + 1, "/", count_y, "   ", end="")
 print("処理完了")
