@@ -34,7 +34,7 @@ def master(xstart, xend, ystart, yend, nokori):
         tmp += norminput.data[xend-1][i][1]
     xend_ave = tmp / (yend - ystart)
     #print(xend_ave)
-    if (xend_ave - xstart_ave) * (xend_ave - xstart_ave) > 175 and xend-xstart>20:
+    if (xend_ave - xstart_ave) * (xend_ave - xstart_ave) > 144 and xend-xstart>100:
         master(xstart, (xstart + xend) // 2, ystart, yend, nokori)
         master((xstart + xend) // 2, xend, ystart, yend, nokori)
     else:
@@ -49,7 +49,7 @@ def master(xstart, xend, ystart, yend, nokori):
             tmp += norminput.data[i][yend-1][1]
         yend_ave = tmp / (yend - ystart)
         #print(yend_ave)
-        if (yend_ave - ystart_ave) * (yend_ave - ystart_ave) > 175 and yend-ystart>100:
+        if (yend_ave - ystart_ave) * (yend_ave - ystart_ave) > 300 and yend-ystart>50:
             master(xstart, xend, ystart, (ystart + yend) // 2, nokori)
             master(xstart, xend, (ystart + yend) // 2, yend, nokori)
         else:
@@ -110,8 +110,8 @@ for i in range(norminput.count_x):
 
 area_x = [0]
 area_y = [0]
-divide_x = 12
-divide_y = 7
+divide_x = 18
+divide_y = 5
 tmp = (norminput.count_x // divide_x) + 1
 while (tmp < norminput.count_x):
     area_x.append(tmp)
@@ -134,7 +134,13 @@ for i in range(divide_x):
 
 
 '''メモ
-第１四分位数を利用
 地図の横は1.14kmくらい
 　→縦は1kmくらい？
+
+＊パラメータの選択肢＊
+113-114行目 大本の地図分割数
+37、52行目 関数中での判定条件（どれだけの勾配か、どれだけの最低距離か）
+
+
+
 '''
