@@ -4,7 +4,7 @@ import numpy as np
 import norminput
 import mpointsl
 print("\n========================================")
-print("  out Ver. 1.4 (20191203-7)")
+print("  out Ver. 2.2 (20191214)")
 print("========================================\n")
 
 
