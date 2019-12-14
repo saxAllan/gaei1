@@ -1,7 +1,7 @@
 from scipy.spatial import Delaunay
 import matplotlib.pyplot as plt
 import numpy as np
-import norminput
+import norminput3
 import mpointsl
 print("\n========================================")
 print("  out Ver. 2.2 (20191214)")
@@ -11,13 +11,13 @@ print("========================================\n")
 newdata = []
 zdata = []
 cdata = []
-for i in range(norminput.count_y):
-    for j in range(norminput.count_x):
-        zdata.append(norminput.data[j][i][0])
-        cdata.append(norminput.data[j][i][1])
+for i in range(norminput3.count_y):
+    for j in range(norminput3.count_x):
+        zdata.append(norminput3.data[j][i][0])
+        cdata.append(norminput3.data[j][i][1])
         newdata.append(j)
         newdata.append(i)
-print(norminput.count_x)
+print(norminput3.count_x)
 print("Delaunay 処理中(多少時間がかかります)")
 pts = np.array(newdata).reshape(-1, 2)
 ztmp = np.array(zdata)
@@ -156,7 +156,7 @@ tconma = '-100,\n'
 outfile.write(tconma)
 textc = ']\n}\ncoordIndex [\n'
 outfile.write(textc)
-for i in range(norminput.count_x + 2):
+for i in range(norminput3.count_x + 2):
     outfile.writelines(str(i))
     conma2 = ','
     outfile.write(conma2)
@@ -195,8 +195,8 @@ tconma = '-100,\n'
 outfile.write(tconma)
 textc = ']\n}\ncoordIndex [\n'
 outfile.write(textc)
-for i in range(norminput.count_y + 2):
-    outfile.writelines(str(norminput.count_y+1-i))
+for i in range(norminput3.count_y + 2):
+    outfile.writelines(str(norminput3.count_y+1-i))
     conma2 = ','
     outfile.write(conma2)
 conma3 = '-1,\n'
@@ -234,8 +234,8 @@ tconma = '-100,\n'
 outfile.write(tconma)
 textc = ']\n}\ncoordIndex [\n'
 outfile.write(textc)
-for i in range(norminput.count_x + 2):
-    outfile.writelines(str(norminput.count_x+1-i))
+for i in range(norminput3.count_x + 2):
+    outfile.writelines(str(norminput3.count_x+1-i))
     conma2 = ','
     outfile.write(conma2)
 conma3 = '-1,\n'
@@ -273,7 +273,7 @@ tconma = '-100,\n'
 outfile.write(tconma)
 textc = ']\n}\ncoordIndex [\n'
 outfile.write(textc)
-for i in range(norminput.count_y + 2):
+for i in range(norminput3.count_y + 2):
     outfile.writelines(str(i))
     conma2 = ','
     outfile.write(conma2)
