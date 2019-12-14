@@ -3,7 +3,7 @@ import norminput
 import statistics
 
 print("\n========================================")
-print("  judgements Ver. 4.3 (20191213)")
+print("  judgements Ver. 4.7 (20191214)")
 print("========================================\n")
 
 
@@ -16,8 +16,7 @@ def master(xstart, xend, ystart, yend, nokori):
             if norminput.data[i][j][0] < 30:
                 orghigh.append(norminput.data[i][j][0])  # 四分位数用
                 high.append((norminput.data[i][j][0] // 2) * 2)  # 下から用
-                norminput.data[i][j][1] = (
-                    norminput.data[i][j][0] // 2) * 2  # 下から用
+                norminput.data[i][j][1] = (norminput.data[i][j][0] // 2) * 2  # 下から用
             else:
                 orghigh.append(18)  # 四分位数用
                 high.append(18)  # 下から用
@@ -88,7 +87,9 @@ def master(xstart, xend, ystart, yend, nokori):
                 for j in range(xstart, xend):
                     if norminput.data[j][i][1] <= mode_high:  # 下から
                         nokori[j][i][0] = norminput.data[j][i][0]
-
+                        norminput.data[j][i][1] = 0
+                    else:
+                        norminput.data[j][i][1] = 1
 
 
 # ここからmain
@@ -110,7 +111,7 @@ for i in range(norminput.count_x):
 
 area_x = [0]
 area_y = [0]
-divide_x = 18
+divide_x = 23
 divide_y = 5
 tmp = (norminput.count_x // divide_x) + 1
 while (tmp < norminput.count_x):
