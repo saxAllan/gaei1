@@ -10,15 +10,12 @@ print("========================================\n")
 def master(xstart, xend, ystart, yend, nokori):
     print("(",xstart, xend, ystart, yend,")",end="   ")
     high = []
-    orghigh = []
     for i in range(xstart, xend):
         for j in range(ystart, yend):
             if norminput.data[i][j][0] < 30:
-                orghigh.append(norminput.data[i][j][0])  # 四分位数用
                 high.append((norminput.data[i][j][0] // 2) * 2)  # 下から用
                 norminput.data[i][j][1] = (norminput.data[i][j][0] // 2) * 2  # 下から用
             else:
-                orghigh.append(18)  # 四分位数用
                 high.append(18)  # 下から用
                 norminput.data[i][j][1] = (
                     norminput.data[i][j][0] // 2) * 2  # 下から用
@@ -69,19 +66,7 @@ def master(xstart, xend, ystart, yend, nokori):
                 mode_high = statistics.mode(high)
 
             # 四分位数
-            orghigh.sort()
-            q1 = 0
-            q3 = 0
-            lengs = len(high)
-            if lengs % 2 == 1:
-                q1 = orghigh[(lengs // 4) + 1]
-                q3 = orghigh[(lengs // 4) * 3 + 1]
-            else:
-                q1 = (orghigh[lengs // 4] + orghigh[(lengs // 4) + 1]) / 2.0
-                q3 = (orghigh[lengs // 4] * 3 + orghigh[(lengs // 4) * 3 + 1]) / 2.0
-
-            #print("    下からx:", mode_high, "    第1四分位:", q1, "    第3四分位:", q3)
-            print("    下からx:", mode_high, "    q3-q1:", f'{q3-q1:.2f}')
+            print("    下からx:", mode_high, )
 
             for i in range(ystart, yend):
                 for j in range(xstart, xend):
@@ -95,8 +80,6 @@ def master(xstart, xend, ystart, yend, nokori):
 # ここからmain
 start_x = 0
 start_y = 0
-label = 0
-max_label = 0
 print("judgements 処理中...")
 
 # ラベリング
