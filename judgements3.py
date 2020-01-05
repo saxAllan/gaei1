@@ -49,7 +49,6 @@ def master(xstart, xend, ystart, yend, nokori):
             master(xstart, xend, ystart, (ystart + yend) // 2, nokori)
             master(xstart, xend, (ystart + yend) // 2, yend, nokori)
         else:
-
             # 下から
             high_list = []
             mode_high = 4
@@ -122,7 +121,7 @@ for i in range(divide_x):
 　→縦は0.9kmくらい？
 
 ＊パラメータの選択肢＊
-113-114行目 大本の地図分割数
+110-111行目 大本の地図分割数
 37、52行目 関数中での判定条件（どれだけの勾配か、どれだけの最低距離か）
 
 
