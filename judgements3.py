@@ -6,7 +6,6 @@ print("\n========================================")
 print("  judgements Ver. 4.7 (20191214)")
 print("========================================\n")
 
-
 def master(xstart, xend, ystart, yend, nokori):
     print("(",xstart, xend, ystart, yend,")",end="   ")
     high = []
@@ -17,8 +16,7 @@ def master(xstart, xend, ystart, yend, nokori):
                 norminput.data[i][j][1] = (norminput.data[i][j][0] // 2) * 2  # 下から用
             else:
                 high.append(18)  # 下から用
-                norminput.data[i][j][1] = (
-                    norminput.data[i][j][0] // 2) * 2  # 下から用
+                norminput.data[i][j][1] = (norminput.data[i][j][0] // 2) * 2  # 下から用
     # 標高差の判定（x方向）
     tmp = 0
     for i in range(ystart, yend):
@@ -117,12 +115,11 @@ for i in range(divide_x):
 
 
 '''メモ
-地図の横は1.1kmくらい
-　→縦は0.9kmくらい？
+地図の横は1.1kmくらい、縦は0.9kmくらい
 
 ＊パラメータの選択肢＊
-110-111行目 大本の地図分割数
-37、52行目 関数中での判定条件（どれだけの勾配か、どれだけの最低距離か）
+94-95行目 大本の地図分割数
+36、46行目 関数中での判定条件（どれだけの勾配か、どれだけの最低距離か）
 
 
 
