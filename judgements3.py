@@ -3,7 +3,7 @@ import norminput
 import statistics
 
 print("\n========================================")
-print("  judgements Ver. 4.7 (20191214)")
+print("  judgements Ver. 4.9 (20200113)")
 print("========================================\n")
 
 def master(xstart, xend, ystart, yend, nokori):
@@ -113,6 +113,23 @@ for i in range(divide_x):
         print(i, j, end=" ")
         master(area_x[i], area_x[i + 1], area_y[j], area_y[j + 1], nokori)
 
+#余分点削除
+for i in range(1, norminput.count_x - 1):
+    for j in range(1, norminput.count_y - 1):
+        if norminput.data[i][j][1] == 0:            
+            tmp0 = norminput.data[i - 1][j + 1][1]
+            tmp1 = norminput.data[i][j + 1][1]
+            tmp2 = norminput.data[i + 1][j + 1][1]
+            tmp3 = norminput.data[i + 1][j][1]
+            tmp4 = norminput.data[i + 1][j - 1][1]
+            tmp5 = norminput.data[i][j - 1][1]
+            tmp6 = norminput.data[i - 1][j - 1][1]
+            tmp7 = norminput.data[i - 1][j][1]
+            if tmp0 + tmp1 + tmp2 + tmp3 + tmp4 + tmp5 + tmp6 + tmp7 == 8:
+                norminput.data[i][j][1] = 1
+
+        
+
 
 '''メモ
 地図の横は1.1kmくらい、縦は0.9kmくらい
@@ -121,6 +138,6 @@ for i in range(divide_x):
 94-95行目 大本の地図分割数
 36、46行目 関数中での判定条件（どれだけの勾配か、どれだけの最低距離か）
 
-
+１点だけひょこって
 
 '''
