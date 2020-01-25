@@ -325,3 +325,6 @@ outfile.write(conma3)
 print("底面処理完了")
 text2 = ']\n}\nappearance Appearance { \nmaterial\nMaterial {}\n}\n}\n'
 outfile.write(text2)
+
+print("処理完了")
+print(filename_o, ".dat としてVRMLファイルを出力しました", sep="")
