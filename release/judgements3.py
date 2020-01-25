@@ -22,12 +22,10 @@ def master(xstart, xend, ystart, yend, nokori):
     for i in range(ystart, yend):
         tmp += norminput.data[xstart][i][1]
     xstart_ave = tmp / (yend - ystart)
-    #print(xstart_ave)
     tmp = 0
     for i in range(ystart, yend):
         tmp += norminput.data[xend-1][i][1]
     xend_ave = tmp / (yend - ystart)
-    #print(xend_ave)
     if (xend_ave - xstart_ave) * (xend_ave - xstart_ave) > 144 and xend-xstart>100:
         master(xstart, (xstart + xend) // 2, ystart, yend, nokori)
         master((xstart + xend) // 2, xend, ystart, yend, nokori)
@@ -37,12 +35,10 @@ def master(xstart, xend, ystart, yend, nokori):
         for i in range(xstart, xend):
             tmp += norminput.data[i][ystart][1]
         ystart_ave = tmp / (xend - xstart)
-        #print(ystart_ave)
         tmp = 0
         for i in range(xstart, xend):
             tmp += norminput.data[i][yend-1][1]
         yend_ave = tmp / (yend - ystart)
-        #print(yend_ave)
         if (yend_ave - ystart_ave) * (yend_ave - ystart_ave) > 300 and yend-ystart>50:
             master(xstart, xend, ystart, (ystart + yend) // 2, nokori)
             master(xstart, xend, (ystart + yend) // 2, yend, nokori)
@@ -52,7 +48,6 @@ def master(xstart, xend, ystart, yend, nokori):
             mode_high = 4
             for i in range(40):
                 high_list.append(high.count(i))
-            # print(high_list)
             tmphigh = 0
             for i in range(40):
                 tmphigh += high_list[i]
@@ -105,8 +100,9 @@ if tmp < norminput.count_y + (norminput.count_y // divide_y):
 
 for i in range(divide_x):
     for j in range(divide_y):
-        print(i, j, end=" ")
+        print("\r", i * divide_y + j + 1, "/", divide_x * divide_y, end="")
         master(area_x[i], area_x[i + 1], area_y[j], area_y[j + 1], nokori)
+print("処理完了")
 
 #余分点削除
 for i in range(1, norminput.count_x - 1):
@@ -122,3 +118,4 @@ for i in range(1, norminput.count_x - 1):
             tmp7 = norminput.data[i - 1][j][1]
             if tmp0 + tmp1 + tmp2 + tmp3 + tmp4 + tmp5 + tmp6 + tmp7 == 8:
                 norminput.data[i][j][1] = 1
+print("余分点削除完了")

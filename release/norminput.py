@@ -56,20 +56,6 @@ while(1):
     print("x=", count_x, "y=", count_y)
     if count_x * count_y == size_org:
         print("正規化完了")
-        '''
-        out = str("")
-        for i in range(size_org):
-            print("\r", i, end="  ")
-            out += str(orgdata[i][0])+" "
-            out += str(orgdata[i][1])+" "
-            out += str(orgdata[i][2])+" "
-            out += str("\n")
-
-        f = open(filename_o+".dat", mode="w")
-        f.write(out)
-        f.close()
-        print(filename_o + ".dat を出力しました")
-        '''
         break
     else:
         print("続行")
