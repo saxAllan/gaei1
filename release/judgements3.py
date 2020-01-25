@@ -8,7 +8,6 @@ print("  judgements Ver. 4.9 (20200113)")
 print("========================================\n")
 
 def master(xstart, xend, ystart, yend, nokori):
-    print("(",xstart, xend, ystart, yend,")",end="   ")
     high = []
     for i in range(xstart, xend):
         for j in range(ystart, yend):
@@ -63,9 +62,6 @@ def master(xstart, xend, ystart, yend, nokori):
             if tmphigh <= 2000:
                 mode_high = statistics.mode(high)
 
-            # 四分位数
-            print("    下からx:", mode_high, )
-
             for i in range(ystart, yend):
                 for j in range(xstart, xend):
                     if norminput.data[j][i][1] <= mode_high:  # 下から
@@ -106,8 +102,6 @@ while (tmp < norminput.count_y):
     tmp += (norminput.count_y // divide_y) + 1
 if tmp < norminput.count_y + (norminput.count_y // divide_y):
     area_y.append(norminput.count_y)
-print(area_x)
-print(area_y)
 
 for i in range(divide_x):
     for j in range(divide_y):
