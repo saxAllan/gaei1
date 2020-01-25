@@ -1,3 +1,4 @@
+#マージ・ドロネー・出力
 from scipy.spatial import Delaunay
 import matplotlib.pyplot as plt
 import numpy as np
@@ -5,7 +6,7 @@ import norminput
 import mpointsl
 import judgements3
 print("\n========================================")
-print("  out3 Ver. 2.4 (20191214)")
+print("  out3 Ver. 2.10 (20200103)")
 print("========================================\n")
 
 

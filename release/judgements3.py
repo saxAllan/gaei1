@@ -1,3 +1,5 @@
+#地面判定
+
 import numpy
 import norminput
 import statistics
@@ -127,17 +129,3 @@ for i in range(1, norminput.count_x - 1):
             tmp7 = norminput.data[i - 1][j][1]
             if tmp0 + tmp1 + tmp2 + tmp3 + tmp4 + tmp5 + tmp6 + tmp7 == 8:
                 norminput.data[i][j][1] = 1
-
-        
-
-
-'''メモ
-地図の横は1.1kmくらい、縦は0.9kmくらい
-
-＊パラメータの選択肢＊
-94-95行目 大本の地図分割数
-36、46行目 関数中での判定条件（どれだけの勾配か、どれだけの最低距離か）
-
-１点だけひょこって
-
-'''
