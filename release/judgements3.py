@@ -1,6 +1,5 @@
 #地面判定
 
-import numpy
 import norminput
 import statistics
 
